@@ -17,6 +17,7 @@ html
           .information
             form(method="POST", action="/slack-invite/invite")#join-form.form
               input(type="text", name="email", placeholder="#{__('ENTER_EMAIL')}")#slack-email.field
+              input(type="text", name="turing", placeholder="#{__('TOURING')}")#slack-turing.field
               if tokenRequired
                 input(type="text", name="token", placeholder="#{__('ENTER_TOKEN')}")#slack-token.field
               input(type="submit", value="Join").submit

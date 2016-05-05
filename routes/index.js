@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/invite', function(req, res) {
-  if (req.body.email && (!config.inviteToken || (!!config.inviteToken && req.body.token === config.inviteToken))) {
+  if (req.body.email && req.body.turing == '42') {
     request.post({
         url: 'https://'+ config.slackUrl + '/api/users.admin.invite',
         form: {
@@ -53,8 +53,13 @@ router.post('/invite', function(req, res) {
       });
   } else {
     var errMsg = [];
+
     if (!req.body.email) {
       errMsg.push('your email is required');
+    }
+
+    if (!req.body.turing || req.body.turing != '42') {
+	errMsg.push('You are not human');
     }
 
     if (!!config.inviteToken) {
