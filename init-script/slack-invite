@@ -1,0 +1,22 @@
+#!/bin/sh
+#/etc/init.d/slack-invite
+
+export PATH=$PATH:/usr/local/bin
+export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
+
+SOURCE_DIR=/home/bitweb/slack-invite
+
+case "$1" in
+  start)
+  exec runuser -s /bin/bash nodejs -c "forever start --sourceDir=$SOURCE_DIR -p /var/log/forever --uid "slack-invite" -a bin/www"
+  ;;
+stop)
+  exec runuser -s /bin/bash nodejs -c "forever stop --sourceDir=$SOURCE_DIR -p /var/log/forever --uid "slack-invite" bin/www"
+  ;;
+*)
+  echo "Usage: /etc/init.d/nodeup {start|stop}"
+  exit 1
+  ;;
+esac
+
+exit 0
